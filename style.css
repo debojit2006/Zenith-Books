@@ -1,0 +1,280 @@
+/* --- Core Variables & Reset --- */
+:root {
+    /* Light Mode Palette */
+    --bg-primary-light: #F8F9FA;
+    --bg-content-light: #FFFFFF;
+    --text-primary-light: #212529;
+    --text-secondary-light: #6C757D;
+    --border-light: #DEE2E6;
+
+    /* Action Colors */
+    --color-primary: #0d6efd;
+    --color-success: #198754;
+    --color-danger: #dc3545;
+
+    /* Spacing (8pt grid) */
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+
+    /* Typography */
+    --font-family: 'Inter', sans-serif;
+    --h1-size: 2.25rem;  /* 36px */
+    --h3-size: 1.25rem;  /* 20px */
+    --body-size: 1rem;   /* 16px */
+    --caption-size: 0.875rem; /* 14px */
+    --line-height: 1.6;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-primary-light);
+    color: var(--text-primary-light);
+    font-size: var(--body-size);
+    line-height: var(--line-height);
+}
+
+/* --- App Layout --- */
+.screen {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    height: 100vh;
+}
+.screen.active {
+    display: flex; /* Show the active screen */
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    padding: var(--space-2);
+    background-color: var(--bg-content-light);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.app-header h1 {
+    font-size: var(--h1-size);
+    font-weight: 700;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary-light);
+    cursor: pointer;
+    margin-right: -24px; /* Balance the centered title */
+}
+
+
+.content {
+    padding: var(--space-2);
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.card {
+    background-color: var(--bg-content-light);
+    border-radius: var(--space-1);
+    padding: var(--space-2);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* --- Floating Action Button (FAB) --- */
+.fab {
+    position: fixed;
+    bottom: var(--space-3);
+    right: var(--space-3);
+    width: 56px;
+    height: 56px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.fab:active {
+    transform: scale(0.95);
+}
+
+/* --- Action Sheet --- */
+.action-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: flex-end;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.action-sheet.show {
+    opacity: 1;
+    visibility: visible;
+}
+.action-sheet-content {
+    background-color: var(--bg-primary-light);
+    width: 100%;
+    padding: var(--space-1);
+    border-top-left-radius: var(--space-2);
+    border-top-right-radius: var(--space-2);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+.action-sheet.show .action-sheet-content {
+    transform: translateY(0);
+}
+
+.action-item {
+    display: block;
+    width: 100%;
+    padding: var(--space-2);
+    font-size: var(--body-size);
+    text-align: center;
+    background-color: var(--bg-content-light);
+    border: none;
+    border-radius: var(--space-1);
+    margin-bottom: var(--space-1);
+    color: var(--color-primary);
+    cursor: pointer;
+}
+.action-item.cancel {
+    color: var(--color-danger);
+    font-weight: 600;
+}
+
+
+/* --- Forms --- */
+.form-group {
+    margin-bottom: var(--space-2);
+}
+.form-group label {
+    display: block;
+    font-size: var(--caption-size);
+    color: var(--text-secondary-light);
+    margin-bottom: var(--space-1);
+    font-weight: 600;
+}
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="number"] {
+    width: 100%;
+    padding: var(--space-2);
+    border: 1px solid var(--border-light);
+    border-radius: var(--space-1);
+    font-size: var(--body-size);
+    background-color: var(--bg-content-light);
+}
+.form-group input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+}
+
+/* --- Invoice Form Specifics --- */
+.line-items-title {
+    font-size: var(--h3-size);
+    font-weight: 600;
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+}
+.line-item {
+    display: grid;
+    grid-template-columns: 1fr 60px 80px 30px;
+    gap: var(--space-1);
+    align-items: center;
+    margin-bottom: var(--space-1);
+}
+.line-item input {
+    padding: var(--space-1);
+}
+.line-item-delete {
+    background: none;
+    border: none;
+    color: var(--color-danger);
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-secondary {
+    display: block;
+    width: 100%;
+    padding: var(--space-2);
+    border-radius: var(--space-1);
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    background-color: transparent;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+}
+
+.total-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) 0;
+    margin-top: var(--space-3);
+    border-top: 1px solid var(--border-light);
+    font-size: var(--h3-size);
+    font-weight: 700;
+}
+
+.form-actions {
+    margin-top: var(--space-2);
+}
+.btn {
+    width: 100%;
+    padding: var(--space-2);
+    border-radius: var(--space-1);
+    border: none;
+    font-size: var(--body-size);
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: var(--space-1);
+}
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+.btn-tertiary {
+    background: none;
+    color: var(--text-secondary-light);
+}
+
+/* --- Toast Notification --- */
+.toast {
+    position: fixed;
+    top: -100px; /* Start off-screen */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-success);
+    color: white;
+    padding: var(--space-2);
+    border-radius: var(--space-1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: top 0.4s ease-in-out;
+    z-index: 1000;
+}
+.toast.show {
+    top: var(--space-2);
+}
