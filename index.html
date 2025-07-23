@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenith Books - Invoice</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="app">
+
+        <main id="dashboard-screen" class="screen active">
+            <header class="app-header">
+                <h1>Dashboard</h1>
+            </header>
+            <div class="content">
+                <div class="card">
+                    <p>Welcome to Zenith Books!</p>
+                    <p>Your financial overview will appear here.</p>
+                </div>
+            </div>
+            <button id="fab" class="fab">+</button>
+        </main>
+
+        <main id="invoice-screen" class="screen">
+            <header class="app-header">
+                <button id="back-to-dashboard" class="back-button">←</button>
+                <h1>New Invoice</h1>
+            </header>
+            <div class="content">
+                <form id="invoice-form">
+                    <div class="form-group">
+                        <label for="customer">Bill To</label>
+                        <input type="text" id="customer" name="customer" placeholder="Search and select a customer">
+                    </div>
+                    <div class="form-group">
+                        <label for="invoice-date">Date</label>
+                        <input type="date" id="invoice-date" name="invoice-date">
+                    </div>
+
+                    <h3 class="line-items-title">Items</h3>
+                    <div id="line-items">
+                        </div>
+                    <button type="button" id="add-item-btn" class="btn-secondary">+ Add Line Item</button>
+
+                    <div class="total-section">
+                        <span>Total</span>
+                        <span id="invoice-total" class="total-amount">₹0.00</span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save and Send</button>
+                        <button type="button" class="btn btn-tertiary">Save as Draft</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <div id="action-sheet" class="action-sheet">
+            <div class="action-sheet-content">
+                <button class="action-item" data-action="new-invoice">New Invoice</button>
+                <button class="action-item" data-action="new-expense">New Expense</button>
+                <button class="action-item" data-action="new-customer">New Customer</button>
+                <button id="cancel-action" class="action-item cancel">Cancel</button>
+            </div>
+        </div>
+
+        <div id="toast" class="toast">
+            <p id="toast-message"></p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
